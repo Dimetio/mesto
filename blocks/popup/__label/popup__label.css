@@ -1,0 +1,15 @@
+.popup__label {
+  max-width: 358px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.popup__label+.popup__label {
+  margin-top: 30px;
+}
+
+@media (max-width: 640px) {
+  .popup__label {
+    max-width: 238px;
+  }
+}

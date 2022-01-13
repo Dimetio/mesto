@@ -1,0 +1,12 @@
+.profile-info__job {
+  color: #fff;
+  font: normal 400 18px/22px 'Inter', 'Arial', sans-serif;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .profile-info__job {
+    font: normal 400 14px/17px 'Inter', 'Arial', sans-serif;
+    margin-bottom: 36px;
+  }
+}

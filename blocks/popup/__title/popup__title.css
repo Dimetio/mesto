@@ -1,0 +1,14 @@
+.popup__title {
+  font: normal 900 24px/29px 'Inter', 'Arial', sans-serif;
+  margin-left: 36px;
+  margin-bottom: 54px;
+  max-width: 330px;
+  padding-top: 34px;
+}
+
+@media (max-width: 640px) {
+  .popup__title {
+    font: normal 900 18px/22px 'Inter', 'Arial', sans-serif;
+    margin-left: 22px;
+  }
+}

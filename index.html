@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+  <section class="popup">
+    <form method="post" action="/" class="popup__container">
+      <div class="popup__title">Редактировать профиль</div>
+
+      <label for="name" class="popup__label">
+        <input type="text" name="name" value="" class="popup__input popup__input-name">
+        <hr class="popup__line">
+      </label>
+
+      <label for="job" class="popup__label">
+        <input type="text" name="job" value="" class="popup__input popup__input-job">
+        <hr class="popup__line">
+      </label>
+      <button class="popup__btn-save">Сохранить</button>
+
+      <img src="images/popup__close.svg" alt="крестик" class="popup__btn-close">
+    </form>
+  </section>
+
+  <header class="header">
+    <img src="images/logo.svg" alt="логотип" class="header__logo">
+    <hr class="header__line">
+  </header>
+
+  <main class="main">
+    <section class="profile">
+      <div class="profile-info">
+        <img src="images/ava.jpg" alt="Жак-Ив Кусто" class="profile-info__avatar">
+
+        <div class="profile-info__content">
+          <div class="profile-info__content-wrap">
+            <h2 class="profile-info__name">Жак-Ив Кусто</h2>
+            <img src="images/edit_btn.svg" alt="редактировать" class="profile-info__edit">
+          </div>
+
+          <p class="profile-info__job">Исследователь океана</p>
+        </div>
+      </div>
+
+      <div class="profile__add">
+        <img src="images/add_btn.svg" alt="добавить">
+      </div>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <img src="images/karachaevsk.jpg" alt="карточка-1" class="card__img">
+
+        <div class="card__content-wrap">
+          <h3 class="card__title">Карачаевск</h3>
+          <img src="images/like.svg" alt="лайк" class="card__like">
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/elbrus.jpg" alt="карточка-1" class="card__img">
+
+        <div class="card__content-wrap">
+          <h3 class="card__title">Гора Эльбрус</h3>
+          <img src="images/like.svg" alt="лайк" class="card__like">
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/dombay.jpg" alt="карточка-1" class="card__img">
+
+        <div class="card__content-wrap">
+          <h3 class="card__title">Домбай</h3>
+          <img src="images/like.svg" alt="лайк" class="card__like">
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/elbrus.jpg" alt="карточка-1" class="card__img">
+
+        <div class="card__content-wrap">
+          <h3 class="card__title">Гора Эльбрус</h3>
+          <img src="images/like.svg" alt="лайк" class="card__like">
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/dombay.jpg" alt="карточка-1" class="card__img">
+
+        <div class="card__content-wrap">
+          <h3 class="card__title">Домбай</h3>
+          <img src="images/like.svg" alt="лайк" class="card__like">
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/karachaevsk.jpg" alt="карточка-1" class="card__img">
+
+        <div class="card__content-wrap">
+          <h3 class="card__title">Карачаево–Черкессия</h3>
+          <img src="images/like.svg" alt="лайк" class="card__like">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">© 2022 Mesto Russia</p>
+  </footer>
+
+  <script src="pages/index.js"></script>
+</body>
+
+</html>

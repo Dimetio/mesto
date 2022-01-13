@@ -1,0 +1,13 @@
+.profile-info__name {
+ color: #fff; 
+ font: normal 500 42px/48px 'Inter', 'Arial', sans-serif;
+ margin: 0 0 16px;
+ position: relative;
+}
+
+@media (max-width: 640px) {
+  .profile-info__name {
+    font: normal 500 27px/33px 'Inter', 'Arial', sans-serif;
+    margin-bottom: 0;
+  }
+}

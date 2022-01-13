@@ -1,0 +1,17 @@
+.profile-info__edit {
+  margin-left: 18px;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.profile-info__edit:hover {
+  opacity: .6;
+}
+
+@media (max-width: 640px) {
+  .profile-info__edit {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
+}
