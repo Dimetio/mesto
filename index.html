@@ -12,17 +12,22 @@
 <body class="page">
   <section class="popup">
     <form method="post" action="/" class="popup__container">
-      <div class="popup__title">Редактировать профиль</div>
+      <h3 class="popup__title">Редактировать профиль</h3>
 
-      <label for="name" class="popup__label">
-        <input type="text" name="name" value="" class="popup__input popup__input-name">
+      <div class="popup__item">
+        <label for="name" class="popup__label">
+          <input type="text" id="name" value="" class="popup__input popup__input-name">
+        </label>
         <hr class="popup__line">
-      </label>
+      </div>
 
-      <label for="job" class="popup__label">
-        <input type="text" name="job" value="" class="popup__input popup__input-job">
+      <div class="popup__item">
+        <label for="job" class="popup__label">
+          <input type="text" id="job" value="" class="popup__input popup__input-job">
+        </label>
         <hr class="popup__line">
-      </label>
+      </div>
+
       <button class="popup__btn-save">Сохранить</button>
 
       <img src="images/popup__close.svg" alt="крестик" class="popup__btn-close">

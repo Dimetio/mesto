@@ -1,15 +1,15 @@
-.popup__label {
+.popup__item {
   max-width: 358px;
   width: 100%;
   margin: 0 auto;
 }
 
-.popup__label+.popup__label {
+.popup__item+.popup__item {
   margin-top: 30px;
 }
 
 @media (max-width: 640px) {
-  .popup__label {
+  .popup__item {
     max-width: 238px;
   }
 }
