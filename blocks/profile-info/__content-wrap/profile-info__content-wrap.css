@@ -1,6 +1,6 @@
 .profile-info__content-wrap {
   display: flex;
-  align-items: baseline;  
+  align-items: baseline;
 }
 
 @media (max-width: 640px) {

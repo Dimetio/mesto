@@ -1,5 +1,5 @@
 (function () {
-  const page = document.querySelector('.page'); // body
+  //const page = document.querySelector('.page'); // body
   const popup = document.querySelector('.popup'); // поп-ап
   const form = popup.querySelector('.popup__container'); // форма
   const inputName = popup.querySelector('.popup__input-name'); // инпут с именем
@@ -9,48 +9,15 @@
 
   const btnClose = popup.querySelector('.popup__btn-close'); // крестик
   const btnEdit = document.querySelector('.profile-info__edit'); // кнопка редактирования
+  const btnLike = document.querySelectorAll('.card__like'); // кнопка лайка
 
-  let isOpened = false; // флаг переключения
-
-  // закрыть поп-ап по нажатию на Esc
-  page.addEventListener('keydown', (event) => {
-    if (isOpened && event.keyCode === 27) {
-      toggleClass(popup, 'popup_opened');
-      toggleClass(page, 'popup-visible');
-    }
-  });
+  //let isOpened = false; // флаг переключения
 
   // функция тоглит класс
   const toggleClass = (elem, className) => {
     elem.classList.toggle(className);
-    isOpened = false;
+    //isOpened = false;
   }
-
-  btnClose.addEventListener('click', () => {
-    toggleClass(popup, 'popup_opened');
-    toggleClass(page, 'popup-visible');
-  })
-
-  btnEdit.addEventListener('click', () => {
-    //popup.classList.add('popup_opened');
-    toggleClass(popup, 'popup_opened');
-    toggleClass(page, 'popup-visible');
-
-    inputName.value = infoName.textContent;
-    inputJob.value = infoJob.textContent;
-
-    isOpened = true;
-  });
-
-  // закрываю поп-ап по клику вне поп-апа
-  popup.addEventListener('click', (e) => {
-    let target = e.target;
-
-    if (target === popup) {
-      toggleClass(popup, 'popup_opened');
-      toggleClass(page, 'popup-visible');
-    }
-  })
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -60,8 +27,52 @@
 
     //popup.classList.remove('popup_opened');
     toggleClass(popup, 'popup_opened');
-    toggleClass(page, 'popup-visible');
+    //toggleClass(page, 'popup-visible');
   }
 
-  form.addEventListener('submit', formSubmitHandler)
+  btnLike.forEach((el) => {
+    el.addEventListener('click', () => {
+      toggleClass(el, 'card__like_active');
+    })
+  });
+
+  // закрыть поп-ап по нажатию на Esc
+  /*
+  page.addEventListener('keydown', (event) => {
+    if (isOpened && event.keyCode === 27) {
+      toggleClass(popup, 'popup_opened');
+      toggleClass(page, 'popup-visible');
+    }
+  });
+  */
+
+  btnClose.addEventListener('click', () => {
+    toggleClass(popup, 'popup_opened');
+    // toggleClass(page, 'popup-visible');
+  })
+
+  btnEdit.addEventListener('click', () => {
+    //popup.classList.add('popup_opened');
+    toggleClass(popup, 'popup_opened');
+    // toggleClass(page, 'popup-visible');
+
+    inputName.value = infoName.textContent;
+    inputJob.value = infoJob.textContent;
+
+    isOpened = true;
+  });
+
+  // закрываю поп-ап по клику вне поп-апа
+  /*
+  popup.addEventListener('click', (e) => {
+    let target = e.target;
+
+    if (target === popup) {
+      toggleClass(popup, 'popup_opened');
+      toggleClass(page, 'popup-visible');
+    }
+  });
+  */
+
+  form.addEventListener('submit', formSubmitHandler);
 }());
