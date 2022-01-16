@@ -1,3 +1,9 @@
 .page {
   background-color: #000;
 }
+
+@media (min-width: 641px) and (max-width: 880px) {
+  .page {
+    padding: 0 15px;
+  }
+}

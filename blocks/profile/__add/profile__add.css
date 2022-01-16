@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .profile__add:hover {
@@ -19,5 +20,6 @@
 @media (max-width: 640px) {
   .profile__add {
     max-width: 282px;
+    margin: 0;
   }
 }
