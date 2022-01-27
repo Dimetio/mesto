@@ -87,6 +87,7 @@
     infoJob.textContent = inputJob.value;
 
     toggleClass(popupEdit, 'popup_opened');
+    closePopupOnCross(popupEdit);
   }
 
   // закрыть поп-ап по нажатию на Esc
