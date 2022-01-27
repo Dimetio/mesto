@@ -20,7 +20,7 @@
 
   /* profile */
   const infoName = document.querySelector('.profile-info__name');
-  const infoJob = document.querySelector('.profile-info__job')  
+  const infoJob = document.querySelector('.profile-info__job')
   const btnEdit = document.querySelector('.profile-info__edit');
   const btnAdd = document.querySelector('.profile__add');
 
@@ -71,17 +71,27 @@
   }
 
   // закрывает поп-пана крестик
-  const closePopup = (btn, popup) => {
-    btn.addEventListener('click', () => {
-      togglePopup(popup);
-    });
+  const closePopup = (popup) => {
+    togglePopup(popup);
   }
+
+  btnEditClose.addEventListener('click', () => {
+    closePopup(popupEdit);
+  });
+
+  btnAddClose.addEventListener('click', () => {
+    closePopup(popupAdd);
+  });
+
+  btnFullscreenClose.addEventListener('click', () => {
+    closePopup(popupFullscreen);
+  });
 
   /* обработчик для добавления */
   const handleAddFormSubmit = (e) => {
     e.preventDefault();
 
-    const data = {}; 
+    const data = {};
     data.name = inputTitle.value;
     data.link = inputLink.value;
 
@@ -101,7 +111,6 @@
     infoJob.textContent = inputJob.value;
 
     togglePopup(popupEdit);
-    closePopup(btnEditClose, popupEdit);
   }
 
   // закрывает поп-ап по нажатию на Esc
@@ -118,14 +127,11 @@
 
     inputName.value = infoName.textContent;
     inputJob.value = infoJob.textContent;
-    closePopup(btnEditClose, popupEdit);
-
     //isOpened = true;
   });
 
   btnAdd.addEventListener('click', () => {
     togglePopup(popupAdd);
-    closePopup(btnAddClose, popupAdd);
   })
 
   // закрывает поп-ап по клику вне поп-апа
@@ -140,8 +146,8 @@
   */
 
   /* 
-  * функция создает карточку, и сразу в вешает 3 события клика: лайк, удаление и фулскрин
-  */
+   * функция создает карточку, и сразу в вешает 3 события клика: лайк, удаление и фулскрин
+   */
   const createCard = (item) => {
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     const img = cardElement.querySelector('.card__img');
@@ -168,8 +174,6 @@
       fullscreenTitle.textContent = cardTitle.textContent;
 
       togglePopup(popupFullscreen);
-
-      closePopup(btnFullscreenClose, popupFullscreen);
     });
 
     img.src = item.link;
