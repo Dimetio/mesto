@@ -1,11 +1,11 @@
 (function () {
-  //const page = document.querySelector('.page'); // body
+  //const page = document.querySelector('.page');
 
   /* popup-edit */
-  const popupEdit = document.querySelector('.popup-edit'); // поп-ап редактирования
-  const formEdit = popupEdit.querySelector('.popup__container'); // форма редактирования
-  const inputName = popupEdit.querySelector('.popup__input-name'); // инпут с именем
-  const inputJob = popupEdit.querySelector('.popup__input-job'); // инпус с деятельностью
+  const popupEdit = document.querySelector('.popup-edit');
+  const formEdit = popupEdit.querySelector('.popup__container');
+  const inputName = popupEdit.querySelector('.popup__input-name');
+  const inputJob = popupEdit.querySelector('.popup__input-job');
 
   /* popup-add */
   const popupAdd = document.querySelector('.popup-add');
@@ -19,13 +19,17 @@
   const fullscreenTitle = popupFullscreen.querySelector('.popup-fullscreen__title');
 
   /* profile */
-  const infoName = document.querySelector('.profile-info__name'); // поле с именем
-  const infoJob = document.querySelector('.profile-info__job'); // поле с деятельностью  
-  const btnEdit = document.querySelector('.profile-info__edit'); // кнопка редактирования
+  const infoName = document.querySelector('.profile-info__name');
+  const infoJob = document.querySelector('.profile-info__job')  
+  const btnEdit = document.querySelector('.profile-info__edit');
   const btnAdd = document.querySelector('.profile__add');
 
   const cards = document.querySelector('.cards');
-  const cardTemplate = document.querySelector('#card-template').content; //шаблон карточки
+  const cardTemplate = document.querySelector('#card-template').content;
+
+  const btnEditClose = document.querySelector('.edit-close');
+  const btnAddClose = document.querySelector('.add-close');
+  const btnFullscreenClose = document.querySelector('.fullscreen-close');
 
   const initialCards = [{
       name: 'Архыз',
@@ -61,22 +65,32 @@
     //isOpened = false;
   }
 
+  // тоглит поп-ап
+  const togglePopup = (popup) => {
+    toggleClass(popup, 'popup_opened');
+  }
+
+  // закрывает поп-пана крестик
+  const closePopup = (btn, popup) => {
+    btn.addEventListener('click', () => {
+      togglePopup(popup);
+    });
+  }
+
   /* обработчик для добавления */
   const handleAddFormSubmit = (e) => {
     e.preventDefault();
 
-    const data = {};
+    const data = {}; 
     data.name = inputTitle.value;
     data.link = inputLink.value;
 
-    initialCards.unshift(data);
-
-    renderCards();
+    cards.prepend(createCard(data));
 
     inputTitle.value = '';
     inputLink.value = '';
 
-    toggleClass(popupAdd, 'popup_opened');
+    togglePopup(popupAdd);
   }
 
   /* обработчик для редактирования */
@@ -86,134 +100,92 @@
     infoName.textContent = inputName.value;
     infoJob.textContent = inputJob.value;
 
-    toggleClass(popupEdit, 'popup_opened');
-    closePopupOnCross(popupEdit);
+    togglePopup(popupEdit);
+    closePopup(btnEditClose, popupEdit);
   }
 
-  // закрыть поп-ап по нажатию на Esc
+  // закрывает поп-ап по нажатию на Esc
   /*
   page.addEventListener('keydown', (event) => {
     if (isOpened && event.keyCode === 27) {
-      toggleClass(popupEdit, 'popup_opened');
+       togglePopup(popup);
     }
   });
   */
 
-  // закрывает поп-ап на крестик
-  const closePopupOnCross = (popup) => {
-    const btnClose = popup.querySelector('.popup__btn-close');
-
-    btnClose.addEventListener('click', foo);
-
-    /* 
-      я хз как ее лучше назвать, она нужна, чтобы снять ивент, 
-      а то будет при повторном клике будет два события висеть
-    */
-    function foo() {
-      toggleClass(popup, 'popup_opened');
-      btnClose.removeEventListener('click', foo);
-    }
-  }
-
   btnEdit.addEventListener('click', () => {
-    toggleClass(popupEdit, 'popup_opened');
+    togglePopup(popupEdit);
 
     inputName.value = infoName.textContent;
     inputJob.value = infoJob.textContent;
-
-    closePopupOnCross(popupEdit);
+    closePopup(btnEditClose, popupEdit);
 
     //isOpened = true;
   });
 
   btnAdd.addEventListener('click', () => {
-    toggleClass(popupAdd, 'popup_opened');
-
-    closePopupOnCross(popupAdd);
+    togglePopup(popupAdd);
+    closePopup(btnAddClose, popupAdd);
   })
 
-  // закрываю поп-ап по клику вне поп-апа
+  // закрывает поп-ап по клику вне поп-апа
   /*
   popup.addEventListener('click', (e) => {
     let target = e.target;
 
     if (target === popup) {
-      toggleClass(popupEdit, 'popup_opened');
-      toggleClass(page, 'popup-visible');
+       togglePopup(popup);
     }
   });
   */
 
-  /* открывает поп-ап с картиной по клику на картинку */
-  const openFullImg = () => {
-    const images = document.querySelectorAll('.card__img-overlay');
+  /* 
+  * функция создает карточку, и сразу в вешает 3 события клика: лайк, удаление и фулскрин
+  */
+  const createCard = (item) => {
+    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+    const img = cardElement.querySelector('.card__img');
+    const title = cardElement.querySelector('.card__title');
+    const btnLike = cardElement.querySelector('.card__like');
+    const btnTrash = cardElement.querySelector('.card__img-trash');
+    const image = cardElement.querySelector('.card__img-overlay');
+    const cardImg = cardElement.querySelector('.card__img');
+    const cardTitle = cardElement.querySelector('.card__title');
 
-    images.forEach((el) => {
-      const parentElement = el.closest('.card');
-      const cardImg = parentElement.querySelector('.card__img');
-      const cardTitle = parentElement.querySelector('.card__title');
-
-      el.addEventListener('click', () => {
-        imgFullscreen.src = cardImg.src;
-        fullscreenTitle.textContent = cardTitle.textContent;
-
-        toggleClass(popupFullscreen, 'popup_opened');
-
-        closePopupOnCross(popupFullscreen);
-      });
+    btnLike.addEventListener('click', () => {
+      toggleClass(btnLike, 'card__like_active');
     });
-  }
 
-  /* удаление карточки */
-  const deleteCard = () => {
-    const btnTrash = document.querySelectorAll('.card__img-trash');
-
-    btnTrash.forEach((el, index) => {
-      el.addEventListener('click', () => {
-        const cardElement = el.closest('.card');
-        cardElement.remove();
-
-        initialCards.splice(index, 1);
-
-        renderCards();
-      });
+    btnTrash.addEventListener('click', () => {
+      cardElement.remove();
     });
-  }
 
-  /* лайк карточек */
-  const likeCard = () => {
-    const btnLike = document.querySelectorAll('.card__like');
+    image.addEventListener('click', () => {
+      imgFullscreen.src = cardImg.src;
 
-    btnLike.forEach((el) => {
-      el.addEventListener('click', () => {
-        toggleClass(el, 'card__like_active');
-      });
+      imgFullscreen.alt = cardTitle.textContent;
+
+      fullscreenTitle.textContent = cardTitle.textContent;
+
+      togglePopup(popupFullscreen);
+
+      closePopup(btnFullscreenClose, popupFullscreen);
     });
+
+    img.src = item.link;
+    img.alt = item.name;
+    title.textContent = item.name;
+
+    return cardElement;
   }
 
   /* создает карточки */
   const renderCards = () => {
-    //cards.innerHTML= '';
-    while (cards.firstChild) {
-      cards.removeChild(cards.firstChild);
-    }
-
     if (initialCards) {
-      initialCards.forEach(el => {
-        const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-        const img = cardElement.querySelector('.card__img');
-        const title = cardElement.querySelector('.card__title');
-
-        img.src = el.link;
-        title.textContent = el.name;
-
-        cards.append(cardElement);
+      initialCards.forEach((el) => {
+        cards.append(createCard(el));
       });
     }
-
-    likeCard();
-    deleteCard();
-    openFullImg();
   }
 
   renderCards();
