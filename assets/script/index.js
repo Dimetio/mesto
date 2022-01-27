@@ -152,7 +152,7 @@
       const parentElement = el.closest('.card');
       const cardImg = parentElement.querySelector('.card__img');
       const cardTitle = parentElement.querySelector('.card__title');
-      
+
       el.addEventListener('click', () => {
         imgFullscreen.src = cardImg.src;
         FullscreenTitle.textContent = cardTitle.textContent;
@@ -168,10 +168,14 @@
   const deleteCard = () => {
     const btnTrash = document.querySelectorAll('.card__img-trash');
 
-    btnTrash.forEach((el) => {
+    btnTrash.forEach((el, index) => {
       el.addEventListener('click', () => {
         const cardElement = el.closest('.card');
         cardElement.remove();
+
+        initialCards.splice(index, 1);
+        
+        renderCards();
       });
     });
   }
