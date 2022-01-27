@@ -146,13 +146,15 @@
 
   /* открывает поп-ап с картиной по клику на картинку */
   const openFullImg = () => {
-    const images = document.querySelectorAll('.card__img');
+    const images = document.querySelectorAll('.card__img-overlay');
 
     images.forEach((el) => {
       const parentElement = el.closest('.card');
+      const cardImg = parentElement.querySelector('.card__img');
       const cardTitle = parentElement.querySelector('.card__title');
+      
       el.addEventListener('click', () => {
-        imgFullscreen.src = el.src;
+        imgFullscreen.src = cardImg.src;
         FullscreenTitle.textContent = cardTitle.textContent;
 
         toggleClass(popupFullscreen, 'popup_opened');
