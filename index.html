@@ -10,9 +10,9 @@
 </head>
 
 <body class="page">
-  <section class="popup">
+  <section class="popup popup-edit">
     <div class="popup__container">
-      <form method="post" action="/" class="popup__form" name="popup-form">
+      <form method="post" action="/" class="popup__form" name="popup-edit">
         <h3 class="popup__title">Редактировать профиль</h3>
 
         <input type="text" id="name" value="" class="popup__input popup__input-name">
@@ -23,6 +23,31 @@
 
         <button type="button" class="popup__btn-close"></button>
       </form>
+    </div>
+  </section>
+
+  <section class="popup popup-add">
+    <div class="popup__container">
+      <form method="post" action="/" class="popup__form" name="popup-add">
+        <h3 class="popup__title">Новое место</h3>
+
+        <input type="text" id="title" value="" class="popup__input popup__input-title" placeholder="Название">
+
+        <input type="text" id="link" value="" class="popup__input popup__input-link" placeholder="Ссылка на картинку">
+
+        <button class="popup__btn-save" type="submit">Создать</button>
+
+        <button type="button" class="popup__btn-close"></button>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup popup-fullscreen">
+    <div class="popup-fullscreen__container">
+      <img src="" alt="картиночка" class="popup-fullscreen__img">
+
+      <p class="popup-fullscreen__title"></p>
+      <button type="button" class="popup__btn-close"></button>
     </div>
   </section>
 
@@ -50,67 +75,24 @@
       </div>
     </section>
 
-    <section class="cards">
-      <div class="card">
-        <img src="images/trash.svg" alt="корзина" class="card__img-trash">
-        <img src="images/karachaevsk.jpg" alt="карточка-1" class="card__img">
-
-        <div class="card__content-wrap">
-          <h3 class="card__title">Карачаевск</h3>
-          <button type="button" class="card__like"></button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="images/elbrus.jpg" alt="карточка-1" class="card__img">
-
-        <div class="card__content-wrap">
-          <h3 class="card__title">Гора Эльбрус</h3>
-          <button type="button" class="card__like"></button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="images/dombay.jpg" alt="карточка-1" class="card__img">
-
-        <div class="card__content-wrap">
-          <h3 class="card__title">Домбай</h3>
-          <button type="button" class="card__like"></button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="images/elbrus.jpg" alt="карточка-1" class="card__img">
-
-        <div class="card__content-wrap">
-          <h3 class="card__title">Гора Эльбрус</h3>
-          <button type="button" class="card__like"></button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="images/dombay.jpg" alt="карточка-1" class="card__img">
-
-        <div class="card__content-wrap">
-          <h3 class="card__title">Домбай</h3>
-          <button type="button" class="card__like"></button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="images/karachaevsk.jpg" alt="карточка-1" class="card__img">
-
-        <div class="card__content-wrap">
-          <h3 class="card__title">Карачаево–Черкессия</h3>
-          <button type="button" class="card__like"></button>
-        </div>
-      </div>
-    </section>
+    <section class="cards"></section>
   </main>
 
   <footer class="footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
+
+  <template id="card-template">
+    <div class="card">
+      <img src="images/trash.svg" alt="корзина" class="card__img-trash">
+      <img src="" alt="картиночка" class="card__img">
+
+      <div class="card__content-wrap">
+        <h3 class="card__title"></h3>
+        <button type="button" class="card__like"></button>
+      </div>
+    </div>
+  </template>
 
   <script src="assets/script/index.js"></script>
 </body>
