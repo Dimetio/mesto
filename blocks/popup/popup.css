@@ -12,6 +12,6 @@
   z-index: -1;
   visibility: hidden;
   transition-property: opacity, visibility, z-index;
-  transition-duration: 1s, 0s, 0s;
-  transition-delay: 0s, 1s, 1s;
+  transition-duration: .5s, 0s, 0s;
+  transition-delay: 0s, .5s, .5s;
 }
