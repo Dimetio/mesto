@@ -44,9 +44,10 @@
 
   <section class="popup popup-fullscreen">
     <div class="popup-fullscreen__container">
-      <img src="" alt="картиночка" class="popup-fullscreen__img">
+      <img src="/" alt="картиночка" class="popup-fullscreen__img">
 
       <p class="popup-fullscreen__title"></p>
+
       <button type="button" class="popup__btn-close"></button>
     </div>
   </section>
@@ -63,6 +64,7 @@
         <div class="profile-info__content">
           <div class="profile-info__content-wrap">
             <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+
             <button type="button" class="profile-info__edit"></button>
           </div>
 
@@ -85,7 +87,10 @@
   <template id="card-template">
     <div class="card">
       <img src="images/trash.svg" alt="корзина" class="card__img-trash">
-      <img src="" alt="картиночка" class="card__img">
+
+      <a href="#" class="card__img-overlay">
+        <img src="" alt="картиночка" class="card__img">
+      </a>
 
       <div class="card__content-wrap">
         <h3 class="card__title"></h3>
