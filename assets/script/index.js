@@ -62,7 +62,7 @@
   }
 
   /* обработчик для добавления */
-  const formAddSubmitHandler = (e) => {
+  const handleAddFormSubmit = (e) => {
     e.preventDefault();
 
     const data = {};
@@ -80,7 +80,7 @@
   }
 
   /* обработчик для редактирования */
-  const formEditSubmitHandler = (e) => {
+  const handleEditFormSubmit = (e) => {
     e.preventDefault();
 
     infoName.textContent = inputName.value;
@@ -101,7 +101,7 @@
 
   // закрывает поп-ап на крестик
   const closePopupOnCross = (popup) => {
-    let btnClose = popup.querySelector('.popup__btn-close');
+    const btnClose = popup.querySelector('.popup__btn-close');
 
     btnClose.addEventListener('click', foo);
 
@@ -218,6 +218,6 @@
 
   renderCards();
 
-  formEdit.addEventListener('submit', formEditSubmitHandler);
-  formAdd.addEventListener('submit', formAddSubmitHandler);
+  formEdit.addEventListener('submit', handleEditFormSubmit);
+  formAdd.addEventListener('submit', handleAddFormSubmit);
 }());
