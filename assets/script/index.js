@@ -16,7 +16,7 @@
   /* popup-fullscreen */
   const popupFullscreen = document.querySelector('.popup-fullscreen');
   const imgFullscreen = popupFullscreen.querySelector('.popup-fullscreen__img');
-  const FullscreenTitle = popupFullscreen.querySelector('.popup-fullscreen__title');
+  const fullscreenTitle = popupFullscreen.querySelector('.popup-fullscreen__title');
 
   /* profile */
   const infoName = document.querySelector('.profile-info__name'); // поле с именем
@@ -155,7 +155,7 @@
 
       el.addEventListener('click', () => {
         imgFullscreen.src = cardImg.src;
-        FullscreenTitle.textContent = cardTitle.textContent;
+        fullscreenTitle.textContent = cardTitle.textContent;
 
         toggleClass(popupFullscreen, 'popup_opened');
 
@@ -174,7 +174,7 @@
         cardElement.remove();
 
         initialCards.splice(index, 1);
-        
+
         renderCards();
       });
     });
