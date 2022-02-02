@@ -1,17 +1,17 @@
 (function () {
-  //const page = document.querySelector('.page');
+  const page = document.querySelector('.page');
 
   /* popup-edit */
   const popupEdit = document.querySelector('.popup-edit');
   const formEdit = popupEdit.querySelector('.popup__container');
-  const inputName = popupEdit.querySelector('.popup__input-name');
-  const inputJob = popupEdit.querySelector('.popup__input-job');
+  const inputName = popupEdit.querySelector('.popup__input_name');
+  const inputJob = popupEdit.querySelector('.popup__input_job');
 
   /* popup-add */
   const popupAdd = document.querySelector('.popup-add');
   const formAdd = popupAdd.querySelector('.popup__container');
-  const inputTitle = popupAdd.querySelector('.popup__input-title');
-  const inputLink = popupAdd.querySelector('.popup__input-link');
+  const inputTitle = popupAdd.querySelector('.popup__input_title');
+  const inputLink = popupAdd.querySelector('.popup__input_link');
 
   /* popup-fullscreen */
   const popupFullscreen = document.querySelector('.popup-fullscreen');
@@ -57,22 +57,29 @@
     }
   ];
 
-  //let isOpened = false; // флаг переключения
-
   // функция тоглит класс
   const toggleClass = (elem, className) => {
     elem.classList.toggle(className);
-    //isOpened = false;
   }
 
   // тоглит поп-ап
   const togglePopup = (popup) => {
     toggleClass(popup, 'popup_opened');
+    keyHandler(popup)
   }
 
   // закрывает поп-пана крестик
   const closePopup = (popup) => {
     togglePopup(popup);
+  }
+
+  // закрывает поп-ап по нажатию на Esc
+  const keyHandler = (popup) => {
+    page.addEventListener('keydown', (event) => {
+      if (event.keyCode === 27) {
+        togglePopup(popup);
+      }
+    });
   }
 
   btnEditClose.addEventListener('click', () => {
@@ -113,21 +120,11 @@
     togglePopup(popupEdit);
   }
 
-  // закрывает поп-ап по нажатию на Esc
-  /*
-  page.addEventListener('keydown', (event) => {
-    if (isOpened && event.keyCode === 27) {
-       togglePopup(popup);
-    }
-  });
-  */
-
   btnEdit.addEventListener('click', () => {
     togglePopup(popupEdit);
 
     inputName.value = infoName.textContent;
     inputJob.value = infoJob.textContent;
-    //isOpened = true;
   });
 
   btnAdd.addEventListener('click', () => {
