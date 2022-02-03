@@ -65,7 +65,20 @@
   // тоглит поп-ап
   const togglePopup = (popup) => {
     toggleClass(popup, 'popup_opened');
-    keyHandler(popup)
+
+    page.addEventListener('keydown', (event) => {
+      if (event.keyCode === 27) {
+        handleKey(popup);
+      }
+    });
+
+    popup.addEventListener('click', (e) => {
+      let target = e.target;
+
+      if (target === popup) {
+        handleOverlayClick(popup);
+      }
+    });
   }
 
   // закрывает поп-пана крестик
@@ -74,12 +87,15 @@
   }
 
   // закрывает поп-ап по нажатию на Esc
-  const keyHandler = (popup) => {
-    page.addEventListener('keydown', (event) => {
-      if (event.keyCode === 27) {
-        togglePopup(popup);
-      }
-    });
+  const handleKey = (popup) => {
+    togglePopup(popup);
+    page.removeEventListener('keydown', handleKey);
+  }
+
+  // закрывает поп-ап по клику вне поп-апа
+  const handleOverlayClick = (popup) => {
+    togglePopup(popup);
+    popup.removeEventListener('click', handleOverlayClick);
   }
 
   btnEditClose.addEventListener('click', () => {
@@ -130,17 +146,6 @@
   btnAdd.addEventListener('click', () => {
     togglePopup(popupAdd);
   })
-
-  // закрывает поп-ап по клику вне поп-апа
-  /*
-  popup.addEventListener('click', (e) => {
-    let target = e.target;
-
-    if (target === popup) {
-       togglePopup(popup);
-    }
-  });
-  */
 
   /* 
    * функция создает карточку, и сразу в вешает 3 события клика: лайк, удаление и фулскрин
