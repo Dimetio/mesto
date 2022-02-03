@@ -67,7 +67,7 @@
     toggleClass(popup, 'popup_opened');
 
     page.addEventListener('keydown', (event) => {
-      if (event.keyCode === 27) {
+      if (event.key === 'Escape') {
         handleKey(popup);
       }
     });
