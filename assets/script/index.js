@@ -49,11 +49,6 @@ const cardTemplate = document.querySelector('#card-template').content;
 
 /* functions */
 
-// функция тоглит класс
-function toggleClass(elem, className) {
-  elem.classList.toggle(className);
-}
-
 /* навешивает слушатели внутри поп-апа */
 function addPopupListeners(popup) {
   const buttonClosePopup = popup.querySelector('.popup__btn-close');
@@ -138,7 +133,7 @@ const createCard = (item) => {
 
 function likeCard(e) {
   const target = e.target;
-  toggleClass(target, 'card__like_active')
+  target.classList.toggle('card__like_active');
 }
 
 function deleteCard(e) {
