@@ -39,6 +39,7 @@ const toggleButtonState = (inputList, buttonElement) => {
 
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(SELECTORS.inputSelector));
+
   const buttonElement = formElement.querySelector(SELECTORS.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement);
@@ -59,16 +60,6 @@ const enableValidation = (data) => {
       evt.preventDefault();
     });
 
-    setEventListeners(formList);
+    setEventListeners(formElement);
   });
-
 };
-
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__input-error_active'
-});
