@@ -1,17 +1,17 @@
-let SELECTORS = {};
+let selectors = {};
 
 const showInputError = ((formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
-  inputElement.classList.add(SELECTORS.inputErrorClass);
+  inputElement.classList.add(selectors.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(SELECTORS.errorClass);
+  errorElement.classList.add(selectors.errorClass);
 });
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(SELECTORS.inputErrorClass);
-  errorElement.classList.remove(SELECTORS.errorClass);
+  inputElement.classList.remove(selectors.inputErrorClass);
+  errorElement.classList.remove(selectors.errorClass);
   errorElement.textContent = '';
 };
 
@@ -31,16 +31,16 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(SELECTORS.inactiveButtonClass);
+    buttonElement.classList.add(selectors.inactiveButtonClass);
   } else {
-    buttonElement.classList.remove(SELECTORS.inactiveButtonClass);
+    buttonElement.classList.remove(selectors.inactiveButtonClass);
   }
 }
 
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(SELECTORS.inputSelector));
+  const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
 
-  const buttonElement = formElement.querySelector(SELECTORS.submitButtonSelector);
+  const buttonElement = formElement.querySelector(selectors.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement);
 
@@ -53,8 +53,8 @@ const setEventListeners = (formElement) => {
 };
 
 const enableValidation = (data) => {
-  SELECTORS = data;
-  const formList = Array.from(document.querySelectorAll(SELECTORS.formSelector));
+  selectors = data;
+  const formList = Array.from(document.querySelectorAll(selectors.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
