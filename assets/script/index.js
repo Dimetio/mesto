@@ -66,6 +66,15 @@ function removePopupListeners(popup) {
 }
 
 function openPopup(popup) {
+  enableValidation(popup, {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_inactive',
+    inputErrorClass: 'popup__input_error',
+    errorClass: 'popup__input-error_active'
+  });
+
   addPopupListeners(popup);
   popup.classList.add('popup_opened');
 }
@@ -159,15 +168,6 @@ function openEditPopup() {
   inputName.value = infoName.textContent;
   inputJob.value = infoJob.textContent;
   openPopup(popupEdit);
-
-  enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_inactive',
-    inputErrorClass: 'popup__input_error',
-    errorClass: 'popup__input-error_active'
-  });
 }
 
 /* создает карточки */

@@ -52,14 +52,28 @@ const setEventListeners = (formElement) => {
   });
 };
 
-const enableValidation = (data) => {
-  selectors = data;
-  const formList = Array.from(document.querySelectorAll(selectors.formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
+// const enableValidation = (data) => {
+//   selectors = data;
+//   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
+//   formList.forEach((formElement) => {
+//     formElement.addEventListener('submit', function (evt) {
+//       evt.preventDefault();
+//     });
 
-    setEventListeners(formElement);
+//     setEventListeners(formElement);
+//   });
+// };
+
+const enableValidation = (popup, data) => {
+  selectors = data;
+  const formElement = popup.querySelector(selectors.formSelector);
+
+  formElement.addEventListener('submit', function (evt) {
+    evt.preventDefault();
   });
+
+  setEventListeners(formElement);
 };
+
+
+/* можно подсказать, как реализовать сброс прошлой валидации формы? */
