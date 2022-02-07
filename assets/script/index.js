@@ -172,11 +172,9 @@ function openEditPopup() {
 
 /* создает карточки */
 function renderCards() {
-  if (initialCards.length > 0) {
-    initialCards.forEach((el) => {
-      cards.append(createCard(el));
-    });
-  }
+  initialCards.forEach((el) => {
+    cards.append(createCard(el));
+  });
 }
 
 /* events */
