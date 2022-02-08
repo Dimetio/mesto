@@ -66,15 +66,6 @@ function removePopupListeners(popup) {
 }
 
 function openPopup(popup) {
-  enableValidation(popup, {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_inactive',
-    inputErrorClass: 'popup__input_error',
-    errorClass: 'popup__input-error_active'
-  });
-
   addPopupListeners(popup);
   popup.classList.add('popup_opened');
 }
@@ -164,10 +155,17 @@ function addCard(data) {
   cards.prepend(card);
 }
 
-function openEditPopup() {
+function openEditPopup(popup) {
   inputName.value = infoName.textContent;
   inputJob.value = infoJob.textContent;
-  openPopup(popupEdit);
+  openPopup(popup);
+
+  checkInputValidity(popup, inputName);
+  checkInputValidity(popup, inputJob);
+}
+
+function openAddPopup(popup) {
+  openPopup(popup);
 }
 
 /* создает карточки */
@@ -178,8 +176,8 @@ function renderCards() {
 }
 
 /* events */
-btnEdit.addEventListener('click', openEditPopup);
-btnAdd.addEventListener('click', () => openPopup(popupAdd));
+btnEdit.addEventListener('click', () => openEditPopup(popupEdit));
+btnAdd.addEventListener('click', () => openAddPopup(popupAdd));
 formEdit.addEventListener('submit', handleEditFormSubmit);
 formAdd.addEventListener('submit', handleAddFormSubmit);
 
