@@ -15,17 +15,25 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.textContent = '';
 };
 
+function isValid(input) {
+  return input.validity.valid;
+}
+
 const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
+  let res = isValid(inputElement)
+
+  if (!res) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     hideInputError(formElement, inputElement);
   }
+
+  return res;
 };
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
+    return !isValid(inputElement);
   });
 }
 
@@ -52,28 +60,23 @@ const setEventListeners = (formElement) => {
   });
 };
 
-// const enableValidation = (data) => {
-//   selectors = data;
-//   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
-//   formList.forEach((formElement) => {
-//     formElement.addEventListener('submit', function (evt) {
-//       evt.preventDefault();
-//     });
-
-//     setEventListeners(formElement);
-//   });
-// };
-
-const enableValidation = (popup, data) => {
+const enableValidation = (data) => {
   selectors = data;
-  const formElement = popup.querySelector(selectors.formSelector);
+  const formList = Array.from(document.querySelectorAll(selectors.formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', function (e) {
+      e.preventDefault();
+    });
 
-  formElement.addEventListener('submit', function (evt) {
-    evt.preventDefault();
+    setEventListeners(formElement);
   });
-
-  setEventListeners(formElement);
 };
 
-
-/* можно подсказать, как реализовать сброс прошлой валидации формы? */
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__input-error_active'
+});
