@@ -160,12 +160,14 @@ function openEditPopup(popup) {
   inputJob.value = infoJob.textContent;
   openPopup(popup);
 
-  checkInputValidity(popup, inputName);
-  checkInputValidity(popup, inputJob);
+  checkInputValidity(popup, inputName, {inputErrorClass: 'popup__input_error', errorClass: 'popup__input-error_active'});
+  checkInputValidity(popup, inputJob, {inputErrorClass: 'popup__input_error', errorClass: 'popup__input-error_active'});
 }
 
 function openAddPopup(popup) {
   openPopup(popup);
+  const buttonElement = popup.querySelector('.popup__submit');
+  buttonElement.classList.add('popup__submit_inactive');
 }
 
 /* создает карточки */
