@@ -50,6 +50,7 @@ const infoJob = document.querySelector('.profile-info__job')
 const btnEdit = document.querySelector('.profile-info__edit');
 const btnAdd = document.querySelector('.profile__add');
 const cards = document.querySelector('.cards');
+const cardTemplate = document.querySelector('.card-template').content;
 /* forms */
 
 
@@ -105,11 +106,18 @@ const handlePopupEscPress = (e) => {
   }
 }
 
+function addCard(data) {
+  const card = new Card(data, '.card-template', openFullscreenPopup);
+  const cardElement = card.generateCard();
+  console.log(data)
+  cards.prepend(cardElement);
+}
+
 /* обработчик для добавления */
 const handleAddFormSubmit = (e) => {
   e.preventDefault();
   const data = {
-    name: inputTitle.value,
+    title: inputTitle.value,
     link: inputLink.value,
   };
   addCard(data);
@@ -137,22 +145,12 @@ function openFullscreenPopup(e) {
   openPopup(popupFullscreen);
 }
 
-function addCard(data) {
-  const card = createCard(data);
-  cards.prepend(card);
-}
-
-function openEditPopup(popup) {
+function openEditPopup() {
   inputName.value = infoName.textContent;
   inputJob.value = infoJob.textContent;
-  openPopup(popup);
+  openPopup(popupEdit);
 
-  const formElement = popup.querySelector('.popup__form');
-  validatorEdit.updateValidation(formElement);
-}
-
-function openAddPopup(popup) {
-  openPopup(popup);
+  validatorEdit.updateValidation(formEdit);
 }
 
 function renderCards() {
@@ -166,7 +164,7 @@ function renderCards() {
 
 /* events */
 btnEdit.addEventListener('click', () => openEditPopup(popupEdit));
-btnAdd.addEventListener('click', () => openAddPopup(popupAdd));
+btnAdd.addEventListener('click', () => openPopup(popupAdd));
 formWrapEdit.addEventListener('submit', handleEditFormSubmit);
 formWrapAdd.addEventListener('submit', handleAddFormSubmit);
 
