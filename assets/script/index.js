@@ -49,7 +49,7 @@ const btnEdit = document.querySelector('.profile-info__edit');
 const btnAdd = document.querySelector('.profile__add');
 const cards = document.querySelector('.cards');
 
-const params = {
+const formParams = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
@@ -58,10 +58,10 @@ const params = {
   errorClass: 'popup__input-error_active'
 };
 
-const validAdd = new FormValidator(params, popupAdd); // инстанс класса
+const validAdd = new FormValidator(formParams, popupAdd); // инстанс класса
 validAdd.enableValidation();
 
-const validEdit = new FormValidator(params, popupEdit);
+const validEdit = new FormValidator(formParams, popupEdit);
 validEdit.enableValidation();
 
 /* functions */
