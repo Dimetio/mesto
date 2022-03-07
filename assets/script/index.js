@@ -50,9 +50,7 @@ const infoJob = document.querySelector('.profile-info__job')
 const btnEdit = document.querySelector('.profile-info__edit');
 const btnAdd = document.querySelector('.profile__add');
 const cards = document.querySelector('.cards');
-const cardTemplate = document.querySelector('.card-template').content;
 /* forms */
-
 
 const formParams = {
   inputSelector: '.popup__input',
@@ -106,7 +104,7 @@ const handlePopupEscPress = (e) => {
   }
 }
 
-function addCard(data) {
+function createCard(data) {
   const card = new Card(data, '.card-template', openFullscreenPopup);
   const cardElement = card.generateCard();
   console.log(data)
@@ -120,7 +118,7 @@ const handleAddFormSubmit = (e) => {
     title: inputTitle.value,
     link: inputLink.value,
   };
-  addCard(data);
+  createCard(data);
   closePopup(popupAdd);
   e.target.reset(); // чищу форму
 
