@@ -113,8 +113,8 @@ const handleAddFormSubmit = (e) => {
     link: inputLink.value,
   };
   addCard(data);
-  e.target.reset(); // чищу форму
   closePopup(popupAdd);
+  e.target.reset(); // чищу форму
   const buttonElement = popupAdd.querySelector('.popup__submit');
   buttonElement.classList.add('popup__submit_inactive');
 }
