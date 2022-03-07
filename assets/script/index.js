@@ -77,21 +77,12 @@ function addPopupListeners(popup) {
   page.addEventListener('keydown', handlePopupEscPress);
 }
 
-/* снимает слушатели с поп-апа */
-function removePopupListeners(popup) {
-  const buttonClosePopup = popup.querySelector('.popup__btn-close');
-  buttonClosePopup.removeEventListener('click', handleButtonClosePopup);
-  popup.removeEventListener('click', handlePopupClick);
-  page.removeEventListener('keydown', handlePopupEscPress);
-}
-
 function openPopup(popup) {
   addPopupListeners(popup);
   popup.classList.add('popup_opened');
 }
 
 function closePopup(popup) {
-  removePopupListeners(popup);
   popup.classList.remove('popup_opened');
 }
 
