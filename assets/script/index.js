@@ -30,12 +30,14 @@ const initialCards = [{
 const page = document.querySelector('.page');
 /* popup-edit */
 const popupEdit = document.querySelector('.popup-edit');
-const formEdit = popupEdit.querySelector('.popup__container');
+const formWrapEdit = popupEdit.querySelector('.popup__container');
+const formEdit = popupEdit.querySelector('.popup__form');
 const inputName = popupEdit.querySelector('.popup__input_name');
 const inputJob = popupEdit.querySelector('.popup__input_job');
 /* popup-add */
 const popupAdd = document.querySelector('.popup-add');
-const formAdd = popupAdd.querySelector('.popup__container');
+const formWrapAdd = popupAdd.querySelector('.popup__container');
+const formAdd = popupAdd.querySelector('.popup__form');
 const inputTitle = popupAdd.querySelector('.popup__input_title');
 const inputLink = popupAdd.querySelector('.popup__input_link');
 /* popup-fullscreen */
@@ -48,9 +50,10 @@ const infoJob = document.querySelector('.profile-info__job')
 const btnEdit = document.querySelector('.profile-info__edit');
 const btnAdd = document.querySelector('.profile__add');
 const cards = document.querySelector('.cards');
+/* forms */
+
 
 const formParams = {
-  formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_inactive',
@@ -58,11 +61,11 @@ const formParams = {
   errorClass: 'popup__input-error_active'
 };
 
-const validAdd = new FormValidator(formParams, popupAdd); // инстанс класса
-validAdd.enableValidation();
+const validatorAdd = new FormValidator(formParams, formAdd); // инстанс класса
+validatorAdd.enableValidation();
 
-const validEdit = new FormValidator(formParams, popupEdit);
-validEdit.enableValidation();
+const validatorEdit = new FormValidator(formParams, formEdit);
+validatorEdit.enableValidation();
 
 /* functions */
 
@@ -154,7 +157,7 @@ function openEditPopup(popup) {
   openPopup(popup);
 
   const formElement = popup.querySelector('.popup__form');
-  validEdit.updateValidation(formElement);
+  validatorEdit.updateValidation(formElement);
 }
 
 function openAddPopup(popup) {
@@ -173,8 +176,8 @@ function renderCards() {
 /* events */
 btnEdit.addEventListener('click', () => openEditPopup(popupEdit));
 btnAdd.addEventListener('click', () => openAddPopup(popupAdd));
-formEdit.addEventListener('submit', handleEditFormSubmit);
-formAdd.addEventListener('submit', handleAddFormSubmit);
+formWrapEdit.addEventListener('submit', handleEditFormSubmit);
+formWrapAdd.addEventListener('submit', handleAddFormSubmit);
 
 /* init */
 renderCards();

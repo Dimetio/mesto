@@ -50,6 +50,6 @@ export default class Card {
   }
 
   _deleteCard() {
-    this._element.remove();
+    this._element.remove(); // при = null не заработало почему-то
   }
 }
