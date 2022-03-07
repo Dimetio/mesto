@@ -50,7 +50,6 @@ const infoJob = document.querySelector('.profile-info__job')
 const btnEdit = document.querySelector('.profile-info__edit');
 const btnAdd = document.querySelector('.profile__add');
 const cards = document.querySelector('.cards');
-/* forms */
 
 const formParams = {
   inputSelector: '.popup__input',
