@@ -115,8 +115,8 @@ const handleAddFormSubmit = (e) => {
   addCard(data);
   closePopup(popupAdd);
   e.target.reset(); // чищу форму
-  const buttonElement = popupAdd.querySelector('.popup__submit');
-  buttonElement.classList.add('popup__submit_inactive');
+
+  validatorAdd.updateValidation(formAdd);
 }
 
 /* обработчик для редактирования */
