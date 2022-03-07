@@ -23,6 +23,7 @@ export default class Card {
 
     this._element.querySelector('.card__title').textContent = this._title;
     this._element.querySelector('.card__img').src = this._link;
+    this._element.querySelector('.card__img').alt = this._title; // можно и в переменную положить элемент
 
     return this._element;
   }
