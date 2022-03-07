@@ -2,7 +2,7 @@ export default class Card {
   constructor(data, cardSelector, handleImageClick) {
     this._title = data.title;
     this._link = data.link;
-    
+
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
@@ -29,21 +29,24 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__like').addEventListener('click', () => {
-      this._likeCard();
+    const likeCard = this._element.querySelector('.card__like');
+    likeCard.addEventListener('click', (e) => {
+      this._likeCard(e);
     });
-    
-    this._element.querySelector('.card__img-trash').addEventListener('click', () => {
+
+    const deleteCard = this._element.querySelector('.card__img-trash');
+    deleteCard.addEventListener('click', () => {
       this._deleteCard();
     });
 
-    this._element.querySelector('.card__img-overlay').addEventListener('click', (e) => {
-      if(typeof this._handleImageClick === 'function') this._handleImageClick(e);
+    const image = this._element.querySelector('.card__img-overlay');
+    image.addEventListener('click', (e) => {
+      if (typeof this._handleImageClick === 'function') this._handleImageClick(e);
     });
   }
 
-  _likeCard() {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+  _likeCard(e) {
+    e.target.classList.toggle('card__like_active');
   }
 
   _deleteCard() {
