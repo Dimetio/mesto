@@ -75,12 +75,21 @@ function addPopupListeners(popup) {
   page.addEventListener('keydown', handlePopupEscPress);
 }
 
+/* снимает слушатели с поп-апа */
+function removePopupListeners(popup) {
+  const buttonClosePopup = popup.querySelector('.popup__btn-close');
+  buttonClosePopup.removeEventListener('click', handleButtonClosePopup);
+  popup.removeEventListener('click', handlePopupClick);
+  page.removeEventListener('keydown', handlePopupEscPress);
+}
+
 function openPopup(popup) {
   addPopupListeners(popup);
   popup.classList.add('popup_opened');
 }
 
 function closePopup(popup) {
+  removePopupListeners(popup);
   popup.classList.remove('popup_opened');
 }
 
@@ -106,8 +115,7 @@ const handlePopupEscPress = (e) => {
 function createCard(data) {
   const card = new Card(data, '.card-template', openFullscreenPopup);
   const cardElement = card.generateCard();
-  console.log(data)
-  cards.prepend(cardElement);
+  return cardElement;
 }
 
 /* обработчик для добавления */
@@ -117,8 +125,11 @@ const handleAddFormSubmit = (e) => {
     title: inputTitle.value,
     link: inputLink.value,
   };
-  createCard(data);
+  
+  cards.prepend(createCard(data));
+
   closePopup(popupAdd);
+
   e.target.reset(); // чищу форму
 
   validatorAdd.updateValidation(formAdd);
@@ -153,9 +164,7 @@ function openEditPopup() {
 function renderCards() {
   cards.innerHTML = '';
   initialCards.forEach((item) => {
-    const card = new Card(item, '.card-template', openFullscreenPopup);
-    const cardElement = card.generateCard();
-    cards.append(cardElement);
+    cards.append(createCard(item));
   });
 }
 
