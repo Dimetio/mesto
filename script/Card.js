@@ -23,33 +23,34 @@ export default class Card {
 
     this._element.querySelector('.card__title').textContent = this._title;
     this._element.querySelector('.card__img').src = this._link;
-    this._element.querySelector('.card__img').alt = this._title; // можно и в переменную положить элемент
+    this._element.querySelector('.card__img').alt = this._title;
 
     return this._element;
   }
 
   _setEventListeners() {
-    const likeCard = this._element.querySelector('.card__like');
-    likeCard.addEventListener('click', (e) => {
-      this._likeCard(e);
+    this._likeElement = this._element.querySelector('.card__like');
+    this._likeElement.addEventListener('click', () => {
+      this._likeCard();
     });
 
-    const deleteCard = this._element.querySelector('.card__img-trash');
-    deleteCard.addEventListener('click', () => {
+    this._deleteElement = this._element.querySelector('.card__img-trash');
+    this._deleteElement.addEventListener('click', () => {
       this._deleteCard();
     });
 
-    const image = this._element.querySelector('.card__img-overlay');
-    image.addEventListener('click', (e) => {
+    this._imageElement = this._element.querySelector('.card__img-overlay');
+    this._imageElement.addEventListener('click', (e) => {
       if (typeof this._handleImageClick === 'function') this._handleImageClick(e);
     });
   }
 
-  _likeCard(e) {
-    e.target.classList.toggle('card__like_active');
+  _likeCard() {
+    this._likeElement.classList.toggle('card__like_active');
   }
 
   _deleteCard() {
-    this._element.remove(); // при = null не заработало почему-то
+    this._element.remove();
+    this._element = null;
   }
 }
