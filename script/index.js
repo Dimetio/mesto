@@ -160,7 +160,7 @@ function renderCards() {
 }
 
 /* events */
-btnEdit.addEventListener('click', () => openEditPopup(popupEdit));
+btnEdit.addEventListener('click', () => openEditPopup());
 btnAdd.addEventListener('click', () => openPopup(popupAdd));
 formWrapEdit.addEventListener('submit', handleEditFormSubmit);
 formWrapAdd.addEventListener('submit', handleAddFormSubmit);
