@@ -132,7 +132,7 @@ const handleAddFormSubmit = (e) => {
 
   e.target.reset(); // чищу форму
 
-  validatorAdd.updateValidation(formAdd);
+  validatorAdd.updateValidation();
 }
 
 /* обработчик для редактирования */
@@ -158,7 +158,7 @@ function openEditPopup() {
   inputJob.value = infoJob.textContent;
   openPopup(popupEdit);
 
-  validatorEdit.updateValidation(formEdit);
+  validatorEdit.updateValidation();
 }
 
 function renderCards() {
