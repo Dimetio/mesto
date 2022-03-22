@@ -5,19 +5,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
   <title>Mesto</title>
 </head>
 
 <body class="page">
   <header class="header">
-    <img src="images/logo.svg" alt="логотип" class="header__logo">
+    <img src="<%=require('./images/logo.svg')%>" alt="логотип" class="header__logo">
   </header>
 
   <main class="main">
     <section class="profile">
       <div class="profile-info">
-        <img src="images/ava.jpg" alt="Жак-Ив Кусто" class="profile-info__avatar">
+        <img src="<%=require('./images/ava.jpg')%>" alt="Жак-Ив Кусто" class="profile-info__avatar">
 
         <div class="profile-info__content">
           <div class="profile-info__content-wrap">
@@ -31,7 +30,7 @@
       </div>
 
       <div class="profile__add">
-        <img src="images/add_btn.svg" alt="добавить">
+        <img src="<%=require('./images/add_btn.svg')%>" alt="добавить">
       </div>
     </section>
 
@@ -136,7 +135,7 @@
 
   <template class="card-template">
     <article class="card">
-      <img src="images/trash.svg" alt="корзина" class="card__img-trash">
+      <img src="<%=require('./images/trash.svg')%>" alt="корзина" class="card__img-trash">
 
       <a href="#" class="card__img-overlay">
         <img src="/" alt="картиночка" class="card__img">
@@ -148,8 +147,6 @@
       </div>
     </article>
   </template>
-
-  <script type="module" src="/script/index.js"></script>
 </body>
 
 </html>

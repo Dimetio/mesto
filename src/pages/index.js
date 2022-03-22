@@ -1,3 +1,5 @@
+import './index.css';
+
 import {
   initialCards,
   formEdit,
@@ -9,12 +11,12 @@ import {
   formParams,
 } from '../utils/constants.js';
 
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWhithFrom from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import Card from '../components/Card';
+import FormValidator from '../components/FormValidator';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage';
+import PopupWhithFrom from '../components/PopupWithForm';
+import UserInfo from '../components/UserInfo';
 
 const validatorAdd = new FormValidator(formParams, formAdd);
 validatorAdd.enableValidation();
