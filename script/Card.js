@@ -1,10 +1,10 @@
 export default class Card {
-  constructor(data, cardSelector, handleImageClick) {
+  constructor(data, cardSelector, handleCardClick) {
     this._title = data.title;
     this._link = data.link;
 
     this._cardSelector = cardSelector;
-    this._handleImageClick = handleImageClick;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -41,7 +41,7 @@ export default class Card {
 
     this._imageElement = this._element.querySelector('.card__img-overlay');
     this._imageElement.addEventListener('click', (e) => {
-      if (typeof this._handleImageClick === 'function') this._handleImageClick(e);
+      if (typeof this._handleCardClick === 'function') this._handleCardClick(e);
     });
   }
 
