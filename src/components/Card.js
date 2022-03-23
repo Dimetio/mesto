@@ -40,9 +40,7 @@ export default class Card {
     });
 
     this._imageElement = this._element.querySelector('.card__img-overlay');
-    this._imageElement.addEventListener('click', (e) => {
-      if (typeof this._handleCardClick === 'function') this._handleCardClick(e);
-    });
+    this._imageElement.addEventListener('click', () => this._handleCardClick(this._title, this._link));
   }
 
   _likeCard() {
