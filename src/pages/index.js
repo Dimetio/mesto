@@ -36,6 +36,10 @@ const popupAdd = new PopupWhithFrom('.popup-add', handleAddFormSubmit);
 const popupEdit = new PopupWhithFrom('.popup-edit', handleEditFormSubmit);
 const userElement = new UserInfo('.profile-info__name', '.profile-info__job');
 
+popupFullscreen.setEventListeners();
+popupAdd.setEventListeners();
+popupEdit.setEventListeners();
+
 /* functions */
 
 function createCard(data) {
