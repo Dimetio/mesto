@@ -10,8 +10,8 @@ import {
   formParams,
   url,
   token,
-  avatarImg,
   formAvatar,
+  avatarImg
 } from '../utils/constants.js';
 
 import Card from '../components/Card';
@@ -44,7 +44,7 @@ const popupAdd = new PopupWhithFrom('.popup-add', handleAddFormSubmit);
 const popupEdit = new PopupWhithFrom('.popup-edit', handleEditFormSubmit);
 const popupAvatar = new PopupWhithFrom('.popup-avatar', handleAvatarFromSubmit);
 const popupDeleteCard = new PopupWithSubmit('.popup-delete');
-const userElement = new UserInfo('.profile-info__name', '.profile-info__about');
+const userElement = new UserInfo('.profile-info__name', '.profile-info__about', '.profile-info__avatar');
 
 popupFullscreen.setEventListeners();
 popupAdd.setEventListeners();
@@ -62,21 +62,15 @@ const api = new Api({
 
 let currnetUserId = null;
 
-// забираю данные с сервара и вставляю в верстку
-api.getUserInfo()
-  .then((userData) => {
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userData, cards]) => {
     userElement.setUserInfo(userData);
-    avatarImg.style.backgroundImage = `url(${userData.avatar})`;
+    userElement.updateAvatar(userData);
     currnetUserId = userData._id;
+
+    cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
-
-// рисую карточки
-api.getCards()
-  .then(res => {
-    cardList.renderItems(res);
-  })
-  .catch(err => console.log(err))
 
 /* functions */
 
@@ -149,8 +143,8 @@ function handleAvatarFromSubmit(e, data) {
   e.preventDefault();
   popupAvatar.loading(true);
   api.setAvatar(data)
-    .then(data => {
-      avatarImg.style.backgroundImage = `url(${data.avatar})`;
+    .then(() => {
+      userElement.updateAvatar(data);
       popupAvatar.close();
     })
     .catch(err => console.log(err))
