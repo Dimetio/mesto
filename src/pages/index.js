@@ -1,14 +1,17 @@
 import './index.css';
 
 import {
-  initialCards,
   formEdit,
   inputName,
-  inputJob,
+  inputAbout,
   formAdd,
   btnEdit,
   btnAdd,
   formParams,
+  url,
+  token,
+  avatarImg,
+  formAvatar,
 } from '../utils/constants.js';
 
 import Card from '../components/Card';
@@ -16,54 +19,148 @@ import FormValidator from '../components/FormValidator';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage';
 import PopupWhithFrom from '../components/PopupWithForm';
+import PopupWithSubmit from '../components/PopupWithSubmit';
 import UserInfo from '../components/UserInfo';
+import Api from '../components/Api';
 
 const validatorAdd = new FormValidator(formParams, formAdd);
-validatorAdd.enableValidation();
-
 const validatorEdit = new FormValidator(formParams, formEdit);
+const validatorAvatar = new FormValidator(formParams, formAvatar);
+
+validatorAdd.enableValidation();
 validatorEdit.enableValidation();
+validatorAvatar.enableValidation();
 
 const cardList = new Section({
   renderer: (item) => {
     cardList.addItem(createCard(item));
   }
 }, '.cards');
-cardList.renderItems(initialCards);
+
+
 
 const popupFullscreen = new PopupWithImage('.popup-fullscreen');
 const popupAdd = new PopupWhithFrom('.popup-add', handleAddFormSubmit);
 const popupEdit = new PopupWhithFrom('.popup-edit', handleEditFormSubmit);
-const userElement = new UserInfo('.profile-info__name', '.profile-info__job');
+const popupAvatar = new PopupWhithFrom('.popup-avatar', handleAvatarFromSubmit);
+const popupDeleteCard = new PopupWithSubmit('.popup-delete');
+const userElement = new UserInfo('.profile-info__name', '.profile-info__about');
 
 popupFullscreen.setEventListeners();
 popupAdd.setEventListeners();
 popupEdit.setEventListeners();
+popupDeleteCard.setEventListeners();
+popupAvatar.setEventListeners();
+
+const api = new Api({
+  baseUrl: url,
+  headers: {
+    authorization: token,
+    'Content-Type': 'application/json'
+  }
+});
+
+let currnetUserId = null;
+
+// забираю данные с сервара и вставляю в верстку
+api.getUserInfo()
+  .then((userData) => {
+    userElement.setUserInfo(userData);
+    avatarImg.style.backgroundImage = `url(${userData.avatar})`;
+    currnetUserId = userData._id;
+  })
+  .catch((err) => console.log(err));
+
+// рисую карточки
+api.getCards()
+  .then(res => {
+    cardList.renderItems(res);
+  })
+  .catch(err => console.log(err))
 
 /* functions */
 
 function createCard(data) {
-  const card = new Card(data, '.card-template', (title, link) => popupFullscreen.open(title, link));
-  return card.generateCard();
+  const card = new Card(
+    data,
+    currnetUserId,
+    '.card-template', {
+      handleCardClick: (name, link) => popupFullscreen.open(name, link),
+      handleLikeClick: () => handleLikeClick(card, data),
+      handleCardDelete: () => handleCardDelete(card)
+    },
+  );
+  return card.generateCard(data);
+}
+
+function handleLikeClick(card, data) {
+  const promise = card.isLiked() ? api.dislikeCard(data._id) : api.likeCard(data._id);
+  promise
+    .then((data) => {
+      card.setLike(data);
+    })
+    .catch((err) => {
+      console.log(`${err}`);
+    });
+}
+
+function handleCardDelete(card) {
+  popupDeleteCard.open();
+
+  popupDeleteCard.setFormSubmitHandler(() => {
+    api.deleteCard(card._id)
+      .then(() => {
+        card.deleteCard();
+
+        popupDeleteCard.close();
+      })
+      .catch(err => console.log(err))
+  })
 }
 
 /* обработчик для добавления */
 function handleAddFormSubmit(e, data) {
-  cardList.addItem(createCard(data))
-  popupAdd.close();
+  e.preventDefault();
+  popupAdd.loading(true);
+  api.createCard(data)
+    .then((res) => {
+      cardList.addItem(createCard(res));
+      popupAdd.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupEdit.loading(false))
 }
 
 /* обработчик для редактирования */
 function handleEditFormSubmit(e, data) {
   e.preventDefault();
-  userElement.setUserInfo(data)
-  popupEdit.close();
+  // обновляю данные на сервере
+  popupEdit.loading(true);
+  api.setUserInfo(data)
+    .then((res) => {
+      userElement.setUserInfo(res)
+      popupEdit.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupEdit.loading(false))
+}
+
+function handleAvatarFromSubmit(e, data) {
+  e.preventDefault();
+  popupAvatar.loading(true);
+  api.setAvatar(data)
+    .then(data => {
+      avatarImg.style.backgroundImage = `url(${data.avatar})`;
+      popupAvatar.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupEdit.loading(false))
 }
 
 function openEditPopup() {
   const userInfo = userElement.getUserInfo();
   inputName.value = userInfo.name;
-  inputJob.value = userInfo.job;
+  inputAbout.value = userInfo.about;
 
   validatorEdit.updateValidation();
   popupEdit.open();
@@ -74,4 +171,8 @@ btnEdit.addEventListener('click', openEditPopup);
 btnAdd.addEventListener('click', () => {
   validatorAdd.updateValidation();
   popupAdd.open();
+});
+avatarImg.addEventListener('click', () => {
+  validatorAvatar.enableValidation();
+  popupAvatar.open();
 });
