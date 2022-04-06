@@ -16,16 +16,16 @@
   <main class="main">
     <section class="profile">
       <div class="profile-info">
-        <img src="<%=require('./images/ava.jpg')%>" alt="Жак-Ив Кусто" class="profile-info__avatar">
+        <div class="avatar profile-info__avatar"></div>
 
         <div class="profile-info__content">
           <div class="profile-info__content-wrap">
-            <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+            <h1 class="profile-info__name"></h1>
 
             <button type="button" class="profile-info__edit"></button>
           </div>
 
-          <p class="profile-info__job">Исследователь океана</p>
+          <p class="profile-info__about"></p>
         </div>
       </div>
 
@@ -60,18 +60,18 @@
           <span class="popup__input-error name-input-error"></span>
         </label>
 
-        <label for="job-input" class="popup__label">
+        <label for="about-input" class="popup__label">
           <input
-            name="job"
+            name="about"
             type="text"
-            id="job-input"
-            class="popup__input popup__input_job"
+            id="about-input"
+            class="popup__input popup__input_about"
             placeholder="О себе"
             required
             minlength="2"
             maxlength="200" 
           >
-          <span class="popup__input-error job-input-error"></span>
+          <span class="popup__input-error about-input-error"></span>
         </label>
 
         <button class="popup__submit" type="submit">Сохранить</button>
@@ -87,7 +87,7 @@
 
         <label for="title-input" class="popup__label">
           <input
-            name="title"
+            name="name"
             type="text"
             id="title-input"
             value=""
@@ -133,6 +133,43 @@
     </div>
   </section>
 
+  <section class="popup popup-delete">
+    <div class="popup__container">
+      <h3 class="popup__title">Вы уверены?</h3>
+      <form method="post" action="/" class="popup__form" name="popup-delete" novalidate>
+
+        <button class="popup__submit" type="submit">Да</button>
+        
+        <button type="button" class="popup__btn-close"></button>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup popup-avatar">
+    <div class="popup__container">
+      <h3 class="popup__title">Обновить аватар</h3>
+      <form method="POST" action="/" class="popup__form" name="popup-avatar" novalidate>
+        <label for="avatar-input" class="popup__label">
+          <input
+            name="avatar"
+            type="url"
+            id="avatar-input"
+            value=""
+            class="popup__input popup__input_avatar"
+            placeholder="Ссылка на картинку"
+            required
+          >
+
+          <span class="popup__input-error avatar-input-error"></span>
+        </label>
+
+        <button class="popup__submit" type="submit">Сохранить</button>
+        
+        <button type="button" class="popup__btn-close"></button>
+      </form>
+    </div>
+  </section>
+
   <template class="card-template">
     <article class="card">
       <img src="<%=require('./images/trash.svg')%>" alt="корзина" class="card__img-trash">
@@ -143,7 +180,10 @@
 
       <div class="card__content-wrap">
         <h3 class="card__title"></h3>
-        <button type="button" class="card__like"></button>
+        <div class="card__like-wrapper">
+          <button type="button" class="card__like"></button>
+          <span class="card__like-counter"></span>
+        </div>        
       </div>
     </article>
   </template>
