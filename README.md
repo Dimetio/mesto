@@ -29,4 +29,4 @@
 
   }
 ```
-* [Ссылка на github pages](https://dimetio.github.io/projects/PR4/)
+* [Ссылка на github pages](https://dimetio.github.io/mesto/)
